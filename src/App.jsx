@@ -119,22 +119,50 @@
 //
 // export default App;
 
-
+//
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Navbar from "./components/Navbar";
+// import GetEmployees from "./components/GetEmployees";
+// import Login from "./components/Login";
+// import Signup from "./components/Signup";
+//
+// const App = () => (
+//   <Router>
+//     <Navbar />
+//     <Routes>
+//       <Route path="/" element={<GetEmployees />} />
+//       <Route path="/login" element={<Login />} />
+//       <Route path="/register" element={<Signup />} />
+//     </Routes>
+//   </Router>
+// );
+//
+// export default App;
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import GetEmployees from "./components/GetEmployees";
+import AddEmployee from "./components/AddEmployee";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import TaskAssign from "./components/TaskAssign";
 
-const App = () => (
-  <Router>
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<GetEmployees />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Signup />} />
-    </Routes>
-  </Router>
-);
+const App = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  return (
+    <Router>
+      <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/addemployee" element={<AddEmployee />} />
+        <Route path="/employees" element={<GetEmployees searchTerm={searchTerm} />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/task" element={<TaskAssign />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
+
